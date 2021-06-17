@@ -10,7 +10,7 @@ server.use(cors())
 server.use(express.json());
 
 server.post('/', function (req, res) {
-    res.send({ great: "we did it" })
+    res.send(req.body)
 })
 
 const notion = new Client({
