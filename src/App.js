@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import Main from "./Components/main";
+require('dotenv').config()
 
 function App() {
   return (
