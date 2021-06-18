@@ -30,7 +30,7 @@ function Main() {
       postDefinition: `${ definition }`,
       postSynonyms: `${ synonyms }`
     }
-    postData('http://localhost:5000/', formattedData)
+    postData('https://server-notion-api.herokuapp.com/', formattedData)
     .then(data => {
       console.log(data)
     });
