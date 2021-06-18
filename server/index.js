@@ -1,6 +1,7 @@
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const express = require('express')
 const cors = require('cors')
-const dotenv = require("dotenv").config();
 const { Client } = require("@notionhq/client");
 
 const server = express ()
@@ -10,14 +11,16 @@ server.use(cors())
 server.use(express.json());
 
 server.post('/', function (req, res) {
-    res.send(req.body)
+    const data = req.body
+    const newPageRes = createNewPage(data.postWord, data.postDefinition, data.postSynonyms)
+    res.send(newPageRes);
 })
 
 const notion = new Client({
   auth: process.env.NOTION_API_TOKEN,
 });
 
-module.exports = async function createNewPage(word, definition, synonyms) {
+async function createNewPage(word, definition, synonyms) {
     const response = await notion.pages.create({
         parent: {
             database_id: process.env.WORD_DATABASE_ID,
@@ -27,8 +30,7 @@ module.exports = async function createNewPage(word, definition, synonyms) {
                 title: [
                     {
                         text: {
-                            // content: word,
-                            content: "test",
+                            content: word,
                         },
                     },
                 ],
@@ -36,22 +38,20 @@ module.exports = async function createNewPage(word, definition, synonyms) {
             Definition: {
                 rich_text: [{
                     text: {
-                        // content: definition
-                        content: "test",
+                        content: definition
                     }
                 }]
             },
             Synonym: {
                 rich_text: [{
                     text: {
-                        // content: synonyms,
-                        content: "test",
+                        content: synonyms,
                     }
                 }]
             },
         },
     });
-    return(response);
+    return response;
 };
 
 server.listen(port, () => console.log(`Express departing now from http://localhost:${port}!`))
