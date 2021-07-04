@@ -21,14 +21,26 @@ function Main() {
   }
 
   function changeState(data) {
-    setDefinition(definition = data[0].meanings[0].definitions[0].definition)
-    setSynonyms(data[0].meanings[0].definitions[0].synonyms)
+    if (data[0].meanings[0].definitions[0].definition) {
+      setDefinition(definition = data[0].meanings[0].definitions[0].definition)
+    } else {
+      setDefinition(definition = "N/A")
+    }
+    if (data[0].meanings[0].definitions[0].synonyms) {
+      if (data[0].meanings[0].definitions[0].synonyms.length > 2) {
+        setSynonyms(synonyms = data[0].meanings[0].definitions[0].synonyms.slice(0,3))
+      } else {
+        setSynonyms(synonyms = data[0].meanings[0].definitions[0].synonyms) 
+      }
+    } else {
+      setSynonyms(synonyms = "")
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault()
     const formattedData = {
-      postWord: `${ word }`,
+      postWord: `${ word.charAt(0).toUpperCase() + word.slice(1) }`,
       postDefinition: `${ definition }`,
       postSynonyms: `${ synonyms }`
     }
@@ -58,7 +70,7 @@ function Main() {
     <form onSubmit={ checkDictionary }>
       <label htmlFor="word">Word</label>
       <input id="word" value={ word } onChange={ handleChange } type="text" autoFocus></input>
-      <input id="checkButton" onClick={ checkDictionary } value="check" type="button"></input>
+      <input value="Check" type="submit"></input>
     </form>
     <form onSubmit={ handleSubmit }>
       <label htmlFor="definition">Definition</label>
