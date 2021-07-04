@@ -46,9 +46,6 @@ function Main() {
     }
     postData('https://server-notion-api.herokuapp.com/', formattedData)
     // postData('http://localhost:5000/', formattedData)
-    .then(data => {
-      console.log(data)
-    });
     setWord(word = "")
     setDefinition(definition = "")
     setSynonyms(synonyms = "");
