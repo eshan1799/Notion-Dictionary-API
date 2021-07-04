@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useHistory } from 'react-router'
+import TextareaAutosize from 'react-textarea-autosize';
 
 function Main() {
   let [word, setWord] = useState('');
@@ -28,9 +28,9 @@ function Main() {
     }
     if (data[0].meanings[0].definitions[0].synonyms) {
       if (data[0].meanings[0].definitions[0].synonyms.length > 2) {
-        setSynonyms(synonyms = data[0].meanings[0].definitions[0].synonyms.slice(0,3))
+        setSynonyms(synonyms = data[0].meanings[0].definitions[0].synonyms.slice(0,3).join(', '))
       } else {
-        setSynonyms(synonyms = data[0].meanings[0].definitions[0].synonyms) 
+        setSynonyms(synonyms = data[0].meanings[0].definitions[0].synonyms.join(', ')) 
       }
     } else {
       setSynonyms(synonyms = "")
@@ -71,9 +71,9 @@ function Main() {
     </form>
     <form onSubmit={ handleSubmit }>
       <label htmlFor="definition">Definition</label>
-      <textarea id="definition" value={ definition } readOnly></textarea>
+      <TextareaAutosize id="definition" value={ definition } readOnly/>
       <label htmlFor="synonyms">Synonyms</label>
-      <textarea id="synonyms" value={ synonyms } readOnly></textarea>
+      <TextareaAutosize id="synonyms" value={ synonyms } readOnly/>
       <input type="submit"></input>
     </form>
     </main>
