@@ -10,7 +10,8 @@ function Main() {
       setWord(word = e.target.value)
   }
 
-  function checkDictionary(){
+  function checkDictionary(e){
+    e.preventDefault()
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_GB/${ word }`)
     .then(response => response.json())
     .then(data => changeState(data))
@@ -53,16 +54,20 @@ function Main() {
   }
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <main>
+    <form onSubmit={ checkDictionary }>
       <label htmlFor="word">Word</label>
       <input id="word" value={ word } onChange={ handleChange } type="text" autoFocus></input>
       <input id="checkButton" onClick={ checkDictionary } value="check" type="button"></input>
+    </form>
+    <form onSubmit={ handleSubmit }>
       <label htmlFor="definition">Definition</label>
       <textarea id="definition" value={ definition } readOnly></textarea>
       <label htmlFor="synonyms">Synonyms</label>
       <textarea id="synonyms" value={ synonyms } readOnly></textarea>
       <input type="submit"></input>
     </form>
+    </main>
   );
 }
 
