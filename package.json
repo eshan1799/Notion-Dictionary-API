@@ -2,6 +2,9 @@
   "name": "notion_dictionary-api",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@notionhq/client": "^0.1.8",
     "@testing-library/jest-dom": "^5.13.0",
