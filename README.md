@@ -5,7 +5,7 @@ A webapp that seeks to automate some of the manual facets of creating a new Noti
 
 ## Instructions
 - ## Deployed Version
-    - [private]()
+    - [Private]()
 - ## Local Version
     - ### First Time Setup Instructions
         - #### Prerequisites
