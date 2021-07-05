@@ -5,16 +5,22 @@ function Main() {
   let [word, setWord] = useState('');
   let [definition, setDefinition] = useState('');
   let [synonyms, setSynonyms] = useState('');
+  let [isCheckDisabled, setIsCheckDisabled] = useState(true);
+  let [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   function handleChange(e) {
       setWord(word = e.target.value)
+      setIsCheckDisabled(isCheckDisabled = false)
   }
 
   function checkDictionary(e){
     e.preventDefault()
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_GB/${ word }`)
     .then(response => response.json())
-    .then(data => changeState(data))
+    .then(data => {
+      changeState(data)
+      setIsSubmitDisabled(isSubmitDisabled = false)
+    })
     .catch((error) => {
       console.error('Error:', error)
     })
@@ -48,7 +54,10 @@ function Main() {
     // postData('http://localhost:5000/', formattedData)
     setWord(word = "")
     setDefinition(definition = "")
-    setSynonyms(synonyms = "");
+    setSynonyms(synonyms = "")
+    alert("Successfully submitted!");
+    setIsCheckDisabled(isCheckDisabled = true)
+    setIsSubmitDisabled(isSubmitDisabled = true)
   }
 
   async function postData(url, data) {
@@ -67,14 +76,14 @@ function Main() {
     <form onSubmit={ checkDictionary }>
       <label htmlFor="word">Word</label>
       <input id="word" value={ word } onChange={ handleChange } type="text" autoFocus></input>
-      <input value="Check" type="submit"></input>
+      <input value="Check" type="submit" disabled={ isCheckDisabled }></input>
     </form>
     <form onSubmit={ handleSubmit }>
       <label htmlFor="definition">Definition</label>
       <TextareaAutosize id="definition" value={ definition } readOnly/>
       <label htmlFor="synonyms">Synonyms</label>
       <TextareaAutosize id="synonyms" value={ synonyms } readOnly/>
-      <input type="submit"></input>
+      <input type="submit" disabled={ isSubmitDisabled }></input>
     </form>
     </main>
   );
