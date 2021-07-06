@@ -7,6 +7,7 @@ function Main() {
   let [synonyms, setSynonyms] = useState('');
   let [isCheckDisabled, setIsCheckDisabled] = useState(true);
   let [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  let [isHidden, setIsHidden] = useState(true);
 
   function handleChange(e) {
       setWord(word = e.target.value)
@@ -20,6 +21,7 @@ function Main() {
     .then(data => {
       changeState(data)
       setIsSubmitDisabled(isSubmitDisabled = false)
+      setIsHidden(isHidden = false);
     })
     .catch((error) => {
       console.error('Error:', error)
@@ -58,6 +60,7 @@ function Main() {
     alert("Successfully submitted!");
     setIsCheckDisabled(isCheckDisabled = true)
     setIsSubmitDisabled(isSubmitDisabled = true)
+    setIsHidden(isHidden = true);
   }
 
   async function postData(url, data) {
@@ -74,16 +77,21 @@ function Main() {
   return (
     <main>
     <form onSubmit={ checkDictionary }>
-      <label htmlFor="word">Word</label>
-      <input id="word" value={ word } onChange={ handleChange } type="text" autoFocus></input>
-      <input value="Check" type="submit" disabled={ isCheckDisabled }></input>
+      <label htmlFor="word">Word</label> 
+      <div id="horizontalFlex">
+        <input id="wordInput" value={ word } onChange={ handleChange } type="text" autoFocus></input>
+        <input class="buttons" value="Check" type="submit" disabled={ isCheckDisabled }></input>
+      </div>
     </form>
-    <form onSubmit={ handleSubmit }>
+    <form
+      onSubmit={ handleSubmit }
+      style={ isHidden ? { display:'none' } : { display:'block' }}
+    >
       <label htmlFor="definition">Definition</label>
-      <TextareaAutosize id="definition" value={ definition } readOnly/>
+      <TextareaAutosize id="definition" class="text" value={ definition } readOnly/>
       <label htmlFor="synonyms">Synonyms</label>
-      <TextareaAutosize id="synonyms" value={ synonyms } readOnly/>
-      <input type="submit" disabled={ isSubmitDisabled }></input>
+      <TextareaAutosize id="synonyms" class="text" value={ synonyms } readOnly/>
+      <input class="buttons" type="submit" disabled={ isSubmitDisabled }></input>
     </form>
     </main>
   );
