@@ -10,8 +10,15 @@ function Main() {
   let [isHidden, setIsHidden] = useState(true);
 
   function handleChange(e) {
-      setWord(word = e.target.value)
+    setWord(word = e.target.value)
+    if (word === "") {
+      setIsCheckDisabled(isCheckDisabled = true)
+    } else {
       setIsCheckDisabled(isCheckDisabled = false)
+    }
+    if (definition) {
+      setIsSubmitDisabled(isSubmitDisabled = true)
+    }
   }
 
   function checkDictionary(e){
@@ -80,7 +87,7 @@ function Main() {
       <label htmlFor="word">Word</label> 
       <div id="horizontalFlex">
         <input id="wordInput" value={ word } onChange={ handleChange } type="text" autoFocus></input>
-        <input class="buttons" value="Check" type="submit" disabled={ isCheckDisabled }></input>
+        <input className="buttons" value="Check" type="submit" disabled={ isCheckDisabled }></input>
       </div>
     </form>
     <form
@@ -88,10 +95,10 @@ function Main() {
       style={ isHidden ? { display:'none' } : { display:'block' }}
     >
       <label htmlFor="definition">Definition</label>
-      <TextareaAutosize id="definition" class="text" value={ definition } readOnly/>
+      <TextareaAutosize id="definition" className="text" value={ definition } readOnly/>
       <label htmlFor="synonyms">Synonyms</label>
-      <TextareaAutosize id="synonyms" class="text" value={ synonyms } readOnly/>
-      <input class="buttons" type="submit" disabled={ isSubmitDisabled }></input>
+      <TextareaAutosize id="synonyms" className="text" value={ synonyms } readOnly/>
+      <input className="buttons" type="submit" disabled={ isSubmitDisabled }></input>
     </form>
     </main>
   );
