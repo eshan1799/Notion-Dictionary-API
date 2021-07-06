@@ -1,5 +1,13 @@
+:root {
+  --bg-color: #303030;
+  --white-color: #F6F6F2;
+}
+
 .App {
   text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--white-color);
 }
 
 main {
@@ -18,10 +26,55 @@ form {
   align-items: center;
 }
 
-input {
-  margin-bottom: 1%;
+#horizontalFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-/* #definition {
-  height: 10%;
-} */
+label {
+  font-size: 20px;
+}
+
+#wordInput, .text {
+  display: block;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(#F6F6F2);
+  border: 1px solid var(#388087);
+  font-size: 14px;
+  height: 35px;
+  margin: 30px 30px;
+  padding: 10px 15px;
+  color: black;
+  border-radius: 2px;
+}
+
+.buttons {
+  padding: 8px 45px;
+  margin: 30px 30px;
+  font-size: 100%;
+  border-radius: 5px;
+}
+
+.buttons:disabled {
+  color: grey;
+  background-color: #303030;
+  border: 1px solid grey;
+}
+
+.buttons:enabled {
+  color: white;
+  background-color: #303030;
+  border: 1px solid white;
+  transition: background-color .3s ease;
+}
+
+.buttons:disabled:hover { cursor: not-allowed; }
+
+.buttons:enabled:hover {
+  color: #303030;
+  background-color: white;
+  cursor: pointer;
+}
