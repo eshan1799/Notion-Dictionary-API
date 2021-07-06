@@ -78,3 +78,9 @@ label {
   background-color: white;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  #horizontalFlex {
+    flex-direction: column;    
+  }
+}
