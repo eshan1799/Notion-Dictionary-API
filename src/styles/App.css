@@ -41,13 +41,12 @@ label {
   display: block;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(#F6F6F2);
-  border: 1px solid var(#388087);
   font-size: 14px;
   height: 35px;
   margin: 30px 30px;
   padding: 10px 15px;
   color: black;
+  background-color: lightgray;
   border-radius: 2px;
 }
 
