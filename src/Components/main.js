@@ -9,7 +9,7 @@ function Main() {
   let [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   let [isHidden, setIsHidden] = useState(true);
 
-  function handleChange(e) {
+  function handleWordChange(e) {
     setWord(word = e.target.value)
     if (word === "") {
       setIsCheckDisabled(isCheckDisabled = true)
@@ -19,6 +19,14 @@ function Main() {
     if (definition) {
       setIsSubmitDisabled(isSubmitDisabled = true)
     }
+  }
+  
+  function handleDefinitionChange(e) {
+    setDefinition(definition = e.target.value)
+  }
+
+  function handleSynonymChange(e) {
+    setSynonyms(synonyms = e.target.value)
   }
 
   function checkDictionary(e){
@@ -86,7 +94,7 @@ function Main() {
     <form onSubmit={ checkDictionary }>
       <label htmlFor="word">Word</label> 
       <div id="horizontalFlex">
-        <input id="wordInput" value={ word } onChange={ handleChange } type="text" autoFocus></input>
+        <input id="wordInput" value={ word } onChange={ handleWordChange } type="text" autoFocus></input>
         <input className="buttons" value="Check" type="submit" disabled={ isCheckDisabled }></input>
       </div>
     </form>
@@ -95,9 +103,9 @@ function Main() {
       style={ isHidden ? { display:'none' } : { display:'block' }}
     >
       <label htmlFor="definition">Definition</label>
-      <TextareaAutosize id="definition" className="text" value={ definition } readOnly/>
+      <TextareaAutosize name="definition" id="definition" className="text" value={ definition } onChange={ handleDefinitionChange } />
       <label htmlFor="synonyms">Synonyms</label>
-      <TextareaAutosize id="synonyms" className="text" value={ synonyms } readOnly/>
+      <TextareaAutosize id="synonyms" className="text" value={ synonyms } onChange={ handleSynonymChange } />
       <input className="buttons" type="submit" disabled={ isSubmitDisabled }></input>
     </form>
     </main>
